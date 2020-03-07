@@ -3,6 +3,10 @@ const i2c = require('i2c-bus');
 const i2cBus = i2c.openSync(1);
 const screen = require('oled-i2c-bus');
 const font = require('oled-font-5x7');
+const fs = require('fs');
+var request = require('request');
+let rawSecrets = fs.readFileSync('secrets.json');
+let secrets = JSON.parse(rawSecrets);
 
 
 const sampleRate = { speedHz: 20000 }
@@ -26,6 +30,7 @@ function readTemperatureSensor() {
     temperatureSensor.read((error, reading) => {
         if (error) throw error;
         let temperature = (reading.value * supplyVoltage - 0.5) * 100;
+        sendRequest(temperature)
         const now = new Date()
         let text = 'Temperature -> \n'
         text += `${temperature}\n`
@@ -33,7 +38,31 @@ function readTemperatureSensor() {
         text += 'Last Reading -> '
         text += `${now.toLocaleString()}\n`
         printToDisplay(text)
+        
     })
+}
+
+function sendRequest(temperature) {
+    request({
+        'method': 'POST',
+        'url': 'https://tigoe.io/data',
+        'headers': {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        form: {
+            'macAddress': secrets.mac_address,
+            'sessionKey': secrets.session_key,
+            'data': JSON.stringify({
+                temperature: temperature,
+                temperature_unit: 'celcius',
+                device_id: 'pi_zero_w_1'
+            })
+        }
+    }, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+    });
+
 }
 
 function printToDisplay(text) {
