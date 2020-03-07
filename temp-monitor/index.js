@@ -6,9 +6,7 @@ const font = require('oled-font-5x7');
 
 
 const sampleRate = { speedHz: 20000 }
-let device = {}
 let supplyVoltage = 3.3
-let resolution = 1.0
 
 var oled = new screen(i2cBus, {
     width: 128,
@@ -30,7 +28,8 @@ function readTemperatureSensor() {
         const now = new Date()
         let text = `Temperature reading -> ${temperature}\n`
         text += `Last Reading -> ${now}\n`
-        printToDisplay(text)
+        // printToDisplay(text)
+        console.log(text)
     })
 }
 
