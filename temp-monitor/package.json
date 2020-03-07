@@ -1,0 +1,26 @@
+{
+  "name": "pi-recipies",
+  "version": "1.0.0",
+  "description": "Raspberry Pi Recepies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tirtawr/pi-recipies.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tirtawr/pi-recipies/issues"
+  },
+  "homepage": "https://github.com/tirtawr/pi-recipies#readme",
+  "dependencies": {
+    "request": "^2.88.2",
+    "i2c-bus": "^5.1.0",
+    "mcp-spi-adc": "^3.0.0",
+    "oled-font-5x7": "^1.0.3",
+    "oled-i2c-bus": "^1.0.11"
+  }
+}
