@@ -27,9 +27,11 @@ function readTemperatureSensor() {
         if (error) throw error;
         let temperature = (reading.value * supplyVoltage - 0.5) * 100;
         const now = new Date()
-        let text = `Temperature -> \n`
+        let text = 'Temperature -> \n'
         text += `${temperature}\n`
-        text += `Last Reading -> ${now.toISOString()}\n`
+        text += '\n'
+        text += 'Last Reading -> '
+        text += `${now.toLocaleString()}\n`
         printToDisplay(text)
     })
 }
