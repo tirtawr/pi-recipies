@@ -19,6 +19,7 @@ const temperatureSensor = mcpadc.open(0, sampleRate, addNewChannel)
 
 function addNewChannel(error) {
     if (error) throw error
+    readTemperatureSensor()
 }
 
 function readTemperatureSensor() {
@@ -28,8 +29,7 @@ function readTemperatureSensor() {
         const now = new Date()
         let text = `Temperature reading -> ${temperature}\n`
         text += `Last Reading -> ${now}\n`
-        // printToDisplay(text)
-        console.log(text)
+        printToDisplay(text)
     })
 }
 
@@ -38,5 +38,3 @@ function printToDisplay(text) {
     oled.setCursor(0, 0)
     oled.writeString(font, 1, text, 1, true)
 }
-
-readTemperatureSensor()
