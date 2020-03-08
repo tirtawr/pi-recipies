@@ -5,7 +5,7 @@ const screen = require('oled-i2c-bus');
 const font = require('oled-font-5x7');
 const fs = require('fs');
 var request = require('request');
-let rawSecrets = fs.readFileSync('secrets.json');
+let rawSecrets = fs.readFileSync('./secrets.json');
 let secrets = JSON.parse(rawSecrets);
 
 
