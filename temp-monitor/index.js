@@ -55,7 +55,8 @@ function sendRequest(temperature) {
             'data': JSON.stringify({
                 temperature: temperature,
                 temperature_unit: 'celcius',
-                device_id: 'pi_zero_w_1'
+                device_id: 'pi_zero_w_1',
+                device_timestamp: new Date()
             })
         }
     }, function (error, response) {
